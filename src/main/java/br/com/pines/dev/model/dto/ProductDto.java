@@ -18,7 +18,7 @@ public class ProductDto {
         this.price = price;
     }
 
-    public ProductDto(){
+    public ProductDto(ProductDto productDto){
 
     }
 
@@ -46,7 +46,7 @@ public class ProductDto {
         this.price = price;
     }
 
-    public Product conversor() {
-        return new Product(name, description, price);
+    public Product conversor(ProductDto p) {
+        return new Product(p.getName(), p.getDescription(), p.getPrice());
     }
 }

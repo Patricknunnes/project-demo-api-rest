@@ -7,6 +7,7 @@ import br.com.pines.dev.repository.ProductRepository;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,6 +51,7 @@ public class ProductController {
         return productDto;
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping
     @Transactional
     public ResponseEntity<ProductDto> registrationProduct(@RequestBody ProductDto productDto) {
@@ -58,12 +60,14 @@ public class ProductController {
         return ResponseEntity.ok(productDto);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     @Transactional
     public void deleteProduct(@PathVariable Long id){
         productRepository.deleteById(id);
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PutMapping("/{id}")
     @Transactional
     public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product p) {

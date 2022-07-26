@@ -1,6 +1,7 @@
 package br.com.pines.dev.model.dto;
 
 import br.com.pines.dev.model.User;
+import br.com.pines.dev.repository.RoleRepository;
 
 public class UserForm {
 

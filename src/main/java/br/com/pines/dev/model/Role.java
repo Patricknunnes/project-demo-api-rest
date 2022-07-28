@@ -1,6 +1,7 @@
 package br.com.pines.dev.model;
 
 import br.com.pines.dev.enums.RoleName;
+import br.com.pines.dev.repository.RoleRepository;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;

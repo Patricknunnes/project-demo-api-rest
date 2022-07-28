@@ -21,7 +21,7 @@ public class SecurityConfig {
         http
                 .httpBasic().and().authorizeHttpRequests()
                 .antMatchers(HttpMethod.GET, "/products/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/users").permitAll()
                 .anyRequest().authenticated().and().csrf().disable();
         return http.build();
     }

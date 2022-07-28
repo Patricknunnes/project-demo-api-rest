@@ -1,15 +1,11 @@
 package br.com.pines.dev.model;
 
 import br.com.pines.dev.model.dto.ProductDto;
-import br.com.pines.dev.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
-
 
 @Entity
 @Table(name = "TB_PRODUCT")
@@ -18,7 +14,7 @@ public class Product implements Serializable {
     @Id
     @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long productId;
+    private Long id;
 
     private String name;
 
@@ -37,12 +33,12 @@ public class Product implements Serializable {
         this.registrationDate = LocalDate.now();
     }
 
-    public Long getProductId() {
-        return productId;
+    public Long getId() {
+        return id;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public BigDecimal getPrice() {
@@ -77,7 +73,7 @@ public class Product implements Serializable {
         this.registrationDate = registrationDate;
     }
 
-    public ProductDto conversor(Product p) {
-        return new ProductDto(p.getName(), p.getDescription(), p.getPrice());
+    public ProductDto conversor() {
+        return new ProductDto(this.name, this.description, this.price);
     }
 }

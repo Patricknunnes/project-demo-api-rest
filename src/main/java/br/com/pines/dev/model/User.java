@@ -2,6 +2,7 @@ package br.com.pines.dev.model;
 
 import br.com.pines.dev.enums.RoleName;
 import br.com.pines.dev.repository.RoleRepository;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,13 +20,17 @@ import java.util.List;
 @Table(name = "TB_USER")
 public class User implements UserDetails {
 
-    @Id @NotNull @NotEmpty @Length(max = 14, min = 3)
+    @Id
+    @NotNull
+    @NotEmpty
+    @Length(min = 3, max = 14)
     private String username;
 
-    @NotEmpty @NotNull
+    @NotEmpty
+    @NotNull
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "TB_USERS_ROLES",
     joinColumns = @JoinColumn(name = "username"),
     inverseJoinColumns = @JoinColumn(name = "id"))
@@ -91,5 +96,10 @@ public class User implements UserDetails {
 
     public void roleDefaultAdd(RoleRepository roleRepository){
         this.roles.add(roleRepository.getReferenceById(2L));
+    }
+
+    public void updateAdmin(RoleRepository roleRepository) {
+        this.roles.removeAll(roles);
+        this.roles.add(roleRepository.findById(1L).get());
     }
 }

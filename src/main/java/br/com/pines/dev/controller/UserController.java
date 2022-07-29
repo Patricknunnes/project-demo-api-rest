@@ -6,6 +6,10 @@ import br.com.pines.dev.model.dto.UserForm;
 import br.com.pines.dev.repository.RoleRepository;
 import br.com.pines.dev.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -73,8 +77,9 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping
     @Transactional
-    public List<User> listUsers(){
-        List<User> users = userRepository.findAll();
+    public Page<User> listUsers(@PageableDefault(page = 0, size = 15,
+            sort = "username", direction = Sort.Direction.ASC) Pageable pageable){
+        Page<User> users = userRepository.findAll(pageable);
         return users;
     }
 

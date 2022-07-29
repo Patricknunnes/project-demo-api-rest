@@ -1,6 +1,7 @@
 package br.com.pines.dev.model.dto;
 
 import br.com.pines.dev.model.Product;
+import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 
@@ -23,6 +24,13 @@ public class ProductDto {
 
     public ProductDto(ProductDto productDto){
 
+    }
+
+    public ProductDto(Product product) {
+        this.uriImg = product.getUriImg();
+        this.name = product.getName();
+        this.description = product.getDescription();
+        this.price = product.getPrice();
     }
 
     public String getUriImg() {
@@ -59,5 +67,9 @@ public class ProductDto {
 
     public Product conversor() {
         return new Product(this.uriImg, this.name, this.description, this.price);
+    }
+
+    public static Page<ProductDto> conversorDtoList(Page<Product> products) {
+        return products.map(ProductDto::new);
     }
 }

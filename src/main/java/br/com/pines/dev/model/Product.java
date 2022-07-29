@@ -1,6 +1,7 @@
 package br.com.pines.dev.model;
 
 import br.com.pines.dev.model.dto.ProductDto;
+import org.springframework.data.domain.Page;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -87,4 +88,5 @@ public class Product implements Serializable {
     public void setUriImg(String uriImg) {
         this.uriImg = uriImg;
     }
+
 }

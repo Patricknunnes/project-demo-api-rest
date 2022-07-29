@@ -1,6 +1,5 @@
 package br.com.pines.dev.model;
 
-import br.com.pines.dev.enums.RoleName;
 import br.com.pines.dev.repository.RoleRepository;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.validator.constraints.Length;

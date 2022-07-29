@@ -16,6 +16,8 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String uriImg;
+
     private String name;
 
     private String description;
@@ -26,7 +28,8 @@ public class Product implements Serializable {
 
     public Product(){
     }
-    public Product(String name, String description, BigDecimal price) {
+    public Product(String uriImg, String name, String description, BigDecimal price) {
+        this.uriImg = uriImg;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -74,6 +77,14 @@ public class Product implements Serializable {
     }
 
     public ProductDto conversor() {
-        return new ProductDto(this.name, this.description, this.price);
+        return new ProductDto(this.uriImg, this.name, this.description, this.price);
+    }
+
+    public String getUriImg() {
+        return uriImg;
+    }
+
+    public void setUriImg(String uriImg) {
+        this.uriImg = uriImg;
     }
 }

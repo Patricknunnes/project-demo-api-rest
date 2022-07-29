@@ -6,13 +6,16 @@ import java.math.BigDecimal;
 
 public class ProductDto {
 
+    private String uriImg;
+
     private String name;
 
     private String description;
 
     private BigDecimal price;
 
-    public ProductDto(String name, String description, BigDecimal price) {
+    public ProductDto(String uriImg, String name, String description, BigDecimal price) {
+        this.uriImg = uriImg;
         this.name = name;
         this.description = description;
         this.price = price;
@@ -20,6 +23,14 @@ public class ProductDto {
 
     public ProductDto(ProductDto productDto){
 
+    }
+
+    public String getUriImg() {
+        return uriImg;
+    }
+
+    public void setUriImg(String uriImg) {
+        this.uriImg = uriImg;
     }
 
     public String getName() {
@@ -47,6 +58,6 @@ public class ProductDto {
     }
 
     public Product conversor() {
-        return new Product(this.name, this.description, this.price);
+        return new Product(this.uriImg, this.name, this.description, this.price);
     }
 }

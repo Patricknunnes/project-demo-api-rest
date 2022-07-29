@@ -40,7 +40,22 @@ public class UserController {
             user.roleDefaultAdd(roleRepository);
             user.updatePasswordEncoder(passwordEncoder);
             userRepository.save(user);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(user);
+        }
+    }
+
+    @PostMapping("/admin")
+    @Transactional
+    public ResponseEntity<User> createUserAdmin(@RequestBody @Valid UserForm userForm){
+        User user = userForm.conversor(userForm);
+        Optional<User> userOptional = userRepository.findById(user.getUsername());
+        if (userOptional.isPresent()){
+            return ResponseEntity.badRequest().build();
+        } else {
+            user.updateAdmin(roleRepository);
+            user.updatePasswordEncoder(passwordEncoder);
+            userRepository.save(user);
+            return ResponseEntity.ok(user);
         }
     }
 

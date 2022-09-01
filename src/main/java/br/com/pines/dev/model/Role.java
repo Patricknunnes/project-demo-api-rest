@@ -1,11 +1,16 @@
 package br.com.pines.dev.model;
 
-import br.com.pines.dev.enums.RoleName;
-import br.com.pines.dev.repository.RoleRepository;
+import br.com.pines.dev.model.enums.RoleName;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "TB_ROLE")
 public class Role implements GrantedAuthority {
@@ -22,21 +27,5 @@ public class Role implements GrantedAuthority {
     @Override
     public String getAuthority() {
         return this.roleName.toString();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public RoleName getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(RoleName roleName) {
-        this.roleName = roleName;
     }
 }

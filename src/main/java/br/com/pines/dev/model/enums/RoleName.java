@@ -1,4 +1,4 @@
-package br.com.pines.dev.enums;
+package br.com.pines.dev.model.enums;
 
 public enum RoleName {
     ROLE_ADMIN,

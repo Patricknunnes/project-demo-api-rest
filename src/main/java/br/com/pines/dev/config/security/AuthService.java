@@ -1,7 +1,4 @@
 package br.com.pines.dev.config.security;
-
-import br.com.pines.dev.enums.RoleName;
-import br.com.pines.dev.model.Role;
 import br.com.pines.dev.model.User;
 import br.com.pines.dev.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +8,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional

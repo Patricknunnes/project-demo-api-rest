@@ -11,5 +11,6 @@ import java.util.UUID;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    Page<Product> findByName(String name, Pageable pageable);
+
+    Page<Product> findByNameContaining(String name, Pageable pageable);
 }

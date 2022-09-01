@@ -22,6 +22,7 @@ public class SecurityConfig {
                 .httpBasic().and().authorizeHttpRequests()
                 .antMatchers(HttpMethod.GET, "/products/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/users/**").permitAll()
+                .antMatchers("/swagger-ui.html").permitAll()
                 .anyRequest().authenticated().and().csrf().disable();
         return http.build();
     }

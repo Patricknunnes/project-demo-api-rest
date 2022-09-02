@@ -1,7 +1,8 @@
 package br.com.pines.dev.dto;
 
-import br.com.pines.dev.model.User;
 import lombok.*;
+
+import javax.validation.constraints.NotBlank;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -10,7 +11,9 @@ import lombok.*;
 @Setter
 public class UserDto {
 
+    @NotBlank(message = "Username is mandatory")
     private String username;
 
+    @NotBlank(message = "Password is mandatory")
     private String password;
 }

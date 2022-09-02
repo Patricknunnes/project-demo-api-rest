@@ -23,7 +23,6 @@ public class Role implements GrantedAuthority {
     @Column(nullable = false, unique = true)
     private RoleName roleName;
 
-
     @Override
     public String getAuthority() {
         return this.roleName.toString();

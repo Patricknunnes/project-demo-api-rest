@@ -1,13 +1,17 @@
 package br.com.pines.dev.service;
 
 import br.com.pines.dev.dto.ProductDto;
+import br.com.pines.dev.exception.IdNotFoundException;
 import br.com.pines.dev.model.Product;
 import br.com.pines.dev.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,7 +27,7 @@ public class ProductServiceImplements implements ProductService {
 
     @Override
     public Product getById(Long id) {
-        Product product = productRepository.findById(id).orElseThrow(RuntimeException::new);
+        Product product = productRepository.findById(id).orElseThrow(IdNotFoundException::new);
         return product;
     }
 
@@ -41,7 +45,12 @@ public class ProductServiceImplements implements ProductService {
 
     @Override
     public void delete(Long id) {
-        productRepository.deleteById(id);
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()){
+            productRepository.deleteById(id);
+        } else {
+            throw new IdNotFoundException();
+        }
     }
 
     @Override

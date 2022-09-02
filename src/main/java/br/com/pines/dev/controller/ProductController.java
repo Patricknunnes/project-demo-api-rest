@@ -23,26 +23,26 @@ public class ProductController {
         return productService.getAll();
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{id}")
     public Product getById(@PathVariable Long id) {
         return productService.getById(id);
     }
 
-//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping
     @Transactional
     public Product save(@RequestBody ProductDto productDto) {
         return productService.save(productDto);
     }
 
-//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         productService.delete(id);
     }
 
-//    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PutMapping("/{id}")
     public Product updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
         return productService.update(id, productDto);

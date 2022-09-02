@@ -23,32 +23,32 @@ public class UserController {
         return userService.save(userDto);
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{username}")
     public void delete(@PathVariable String username) {
         userService.delete(username);
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping
     public List<User> getAll() {
         return userService.getAll();
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/{username}")
-    @Transactional
     public User getById(@PathVariable String username) {
         return userService.getById(username);
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
-//    @PutMapping("/{username}")
-//    @Transactional
-//    public void updateToAdmin(@PathVariable String username) {
-//    }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("/{username}")
+    public User updateToAdmin(@PathVariable String username) {
+        return userService.updateToAdmin(username);
+    }
 
-//    @PostMapping()
-//    public void saveWithAdmin(@RequestBody @Valid UserDto userDto) {
-//    }
+    @PostMapping("/admin")
+    public User saveWithAdmin(@RequestBody @Valid UserDto userDto) {
+        return userService.saveWithAdmin(userDto);
+    }
 }

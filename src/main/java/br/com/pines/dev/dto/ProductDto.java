@@ -3,6 +3,7 @@ package br.com.pines.dev.dto;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 @NoArgsConstructor
@@ -21,6 +22,6 @@ public class ProductDto {
     @NotBlank(message = "Description is mandatory")
     private String description;
 
-    @NotBlank(message = "Price is mandatory")
+    @NotNull(message = "Price is mandatory")
     private BigDecimal price;
 }

@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -32,7 +33,7 @@ public class ProductController {
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping
     @Transactional
-    public Product save(@RequestBody ProductDto productDto) {
+    public Product save(@Valid @RequestBody ProductDto productDto) {
         return productService.save(productDto);
     }
 
@@ -44,7 +45,7 @@ public class ProductController {
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id, @RequestBody ProductDto productDto) {
+    public Product updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDto productDto) {
         return productService.update(id, productDto);
     }
 }

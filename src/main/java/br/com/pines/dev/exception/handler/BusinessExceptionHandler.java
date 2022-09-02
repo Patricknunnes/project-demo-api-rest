@@ -16,10 +16,9 @@ public class BusinessExceptionHandler {
     public ResponseEntity<Object> handleIdNotFoundException(IdNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
                 ApiErrorDto.builder()
-                .message("No object found with given id")
+                .message("Not found with given id")
                 .timestamp(Instant.now())
                 .build());
+
     }
-
-
 }

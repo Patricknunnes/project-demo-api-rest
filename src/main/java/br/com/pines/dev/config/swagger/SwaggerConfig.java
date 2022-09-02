@@ -1,4 +1,4 @@
-package br.com.pines.dev.config.security;
+package br.com.pines.dev.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import springfox.documentation.builders.PathSelectors;

@@ -5,9 +5,7 @@ import br.com.pines.dev.exception.IdNotFoundException;
 import br.com.pines.dev.model.Product;
 import br.com.pines.dev.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -55,7 +53,7 @@ public class ProductServiceImplements implements ProductService {
 
     @Override
     public Product update(Long id, ProductDto productDto) {
-        Product product = productRepository.findById(id).orElseThrow(RuntimeException::new);
+        Product product = productRepository.findById(id).orElseThrow(IdNotFoundException::new);
 
         product.setName(productDto.getName());
         product.setDescription(productDto.getDescription());

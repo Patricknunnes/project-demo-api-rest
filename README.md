@@ -24,7 +24,7 @@
 > username: admin                                                                                                                   
 > password: 1234                                                                                                                                                
                                                                                                                       
-## Tecnalidades                                                                                                                 
+## Tecnicalidades                                                                                                                 
                                                                                                                                                                                                                                                           
 > Por simplicidade optei por desenvolver o projeto usando o padrão "Layered Architecture".                                
 > Controller --> Service --> Repository                                                                                                                                   

@@ -1,7 +1,6 @@
 package br.com.pines.dev.service;
 
 import br.com.pines.dev.dto.ProductDto;
-import br.com.pines.dev.exception.IdNotFoundException;
 import br.com.pines.dev.model.Product;
 import br.com.pines.dev.repository.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,9 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
-import javax.swing.text.html.Option;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -21,12 +18,11 @@ import java.util.Optional;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
-class ProductServiceTest {
+class ProductServiceImplementsTest {
     @Mock
     ProductRepository productRepository;
 
@@ -63,11 +59,11 @@ class ProductServiceTest {
 
         given(productRepository.findAll()).willReturn(products);
 
-        List<Product> savedProducts = productServiceImplements.getAll();
+        List<Product> allProducts = productServiceImplements.getAll();
 
         verify(productRepository).findAll();
-        assertThat(savedProducts).isNotNull();
-        assertThat(savedProducts.size()).isEqualTo(2);
+        assertThat(allProducts).isNotNull();
+        assertThat(allProducts.size()).isEqualTo(2);
     }
 
     @Test
@@ -83,7 +79,7 @@ class ProductServiceTest {
 
     @Test
     @DisplayName("Deve salvar um produto com sucesso")
-    void shouldCreateAProductSuccessfully() {
+    void shouldSaveAProductSuccessfully() {
         when(productRepository.save(any())).thenReturn(product);
 
         Product response = productServiceImplements.save(productDto);

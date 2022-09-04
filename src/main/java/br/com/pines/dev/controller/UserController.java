@@ -46,9 +46,4 @@ public class UserController {
     public User updateToAdmin(@PathVariable String username) {
         return userService.updateToAdmin(username);
     }
-
-    @PostMapping("/admin")
-    public User saveWithAdmin(@RequestBody @Valid UserDto userDto) {
-        return userService.saveWithAdmin(userDto);
-    }
 }

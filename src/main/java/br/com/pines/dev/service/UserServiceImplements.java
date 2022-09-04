@@ -40,11 +40,9 @@ public class UserServiceImplements implements UserService {
 
     @Override
     public void delete(String username) {
-        Optional<User> user = userRepository.findById(username);
-        if (user.isPresent()) {
-            userRepository.deleteById(username);
-        }
-        throw new IdNotFoundException();
+        User user = userRepository.findById(username).orElseThrow(IdNotFoundException::new);
+
+        userRepository.deleteById(user.getUsername());
     }
 
     @Override
@@ -56,20 +54,6 @@ public class UserServiceImplements implements UserService {
     public User getById(String username) {
         User user = userRepository.findById(username).orElseThrow(IdNotFoundException::new);
         return user;
-    }
-
-    @Override
-    public User saveWithAdmin(UserDto userDto) {
-        Role role = roleRepository.findById(1L).orElseThrow();
-
-        List<Role> roles = new ArrayList<>();
-        roles.add(role);
-
-        return userRepository.save(User.builder()
-                .username(userDto.getUsername())
-                .password(passwordEncoder.encode(userDto.getPassword()))
-                .roles(roles)
-                .build());
     }
 
     @Override

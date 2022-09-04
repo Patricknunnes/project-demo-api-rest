@@ -12,5 +12,4 @@ public interface UserService {
     List<User> getAll();
     User getById(String username);
     User updateToAdmin(String username);
-    User saveWithAdmin(UserDto userDto);
 }

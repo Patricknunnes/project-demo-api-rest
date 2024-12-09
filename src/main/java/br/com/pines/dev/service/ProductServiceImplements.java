@@ -5,6 +5,7 @@ import br.com.pines.dev.exception.IdNotFoundException;
 import br.com.pines.dev.model.Product;
 import br.com.pines.dev.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,8 +19,8 @@ public class ProductServiceImplements implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public List<Product> getAll() {
-        List<Product> products = productRepository.findAll();
+    public Page<Product> get(Long id, String name, String description) {
+        Page<Product> products = productRepository.findByFilters(id, name, description);
         return products;
     }
 

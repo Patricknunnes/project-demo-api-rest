@@ -4,7 +4,10 @@ package br.com.pines.dev.controller;
 import br.com.pines.dev.dto.ProductDto;
 import br.com.pines.dev.model.Product;
 import br.com.pines.dev.service.ProductService;
+import io.swagger.models.Response;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -19,15 +22,16 @@ public class ProductController {
 
     private final ProductService productService;
 
-    @GetMapping
-    public List<Product> getAll() {
-        return productService.getAll();
-    }
-
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/{id}")
-    public Product getById(@PathVariable Long id) {
-        return productService.getById(id);
+    @GetMapping
+    public ResponseEntity<List<Product>> get(@RequestParam (required = false) Long id,
+                                            @RequestParam (required = false) String name,
+                                            @RequestParam (required = false) String description) {
+        Page<Product> products = productService.get(id, name, description);
+
+        List<Product> products1 = products.getContent();
+
+        return products.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(products1);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")

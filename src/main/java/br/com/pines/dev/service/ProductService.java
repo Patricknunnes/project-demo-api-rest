@@ -2,12 +2,13 @@ package br.com.pines.dev.service;
 
 import br.com.pines.dev.dto.ProductDto;
 import br.com.pines.dev.model.Product;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 public interface ProductService {
 
-    List<Product> getAll();
+    Page<Product> get(Long id, String name, String description);
 
     Product getById(Long id);
 

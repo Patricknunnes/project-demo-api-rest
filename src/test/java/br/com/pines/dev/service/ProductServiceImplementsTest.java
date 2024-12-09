@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -55,15 +57,16 @@ class ProductServiceImplementsTest {
     @Test
     @DisplayName("Deve retornar uma lista de produtos com sucesso")
     void shouldReturnAListOfAllProductsSuccessfully() {
-        List<Product> products = List.of(product, product);
+        List<Product> productList = List.of(product, product);
+        Page<Product> products = new PageImpl<>(productList);
 
-        given(productRepository.findAll()).willReturn(products);
+        given(productRepository.findByFilters(product.getId(), product.getName(), product.getDescription())).willReturn(products);
 
-        List<Product> allProducts = productServiceImplements.getAll();
+        Page<Product> allProducts = productServiceImplements.get(product.getId(), product.getName(), product.getDescription());
 
-        verify(productRepository).findAll();
+        verify(productRepository).findByFilters(product.getId(), product.getName(), product.getDescription());
         assertThat(allProducts).isNotNull();
-        assertThat(allProducts.size()).isEqualTo(2);
+        assertThat(allProducts.getContent().size()).isEqualTo(2);
     }
 
     @Test
